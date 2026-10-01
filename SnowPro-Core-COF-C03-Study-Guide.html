@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SnowPro Core COF-C03 Study Guide</title>
+<style>
+  @page { margin: 1.5cm; }
+  @media print {
+    .page-break { page-break-before: always; }
+    .no-print { display: none; }
+    body { font-size: 9pt; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Calibri, Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #1a1a1a;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 15px;
+    background: #fff;
+  }
+  
+  /* Cover */
+  .cover {
+    text-align: center;
+    padding: 80px 20px 40px;
+    page-break-after: always;
+  }
+  .cover h1 {
+    font-size: 28pt;
+    color: #0078d4;
+    margin: 0;
+    letter-spacing: -0.5px;
+  }
+  .cover h2 {
+    font-size: 18pt;
+    color: #333;
+    font-weight: 400;
+    margin: 5px 0 30px;
+  }
+  .cover-table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-size: 10pt;
+  }
+  .cover-table th {
+    background: #0078d4;
+    color: white;
+    padding: 6px 15px;
+    text-align: left;
+  }
+  .cover-table td {
+    padding: 5px 15px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .cover-table tr:nth-child(even) td { background: #f5f8ff; }
+  .cover .subtitle {
+    color: #888;
+    font-size: 9pt;
+    margin-top: 40px;
+  }
+  
+  /* Headings */
+  h1.domain-title {
+    font-size: 18pt;
+    color: #0050a0;
+    border-bottom: 3px solid #0078d4;
+    padding-bottom: 6px;
+    margin-top: 25px;
+    page-break-before: always;
+  }
+  section.domain:first-child h1.domain-title { page-break-before: avoid; }
+  h2 {
+    font-size: 13pt;
+    color: #0064b8;
+    margin-top: 20px;
+    border-left: 4px solid #0078d4;
+    padding-left: 8px;
+  }
+  h3 {
+    font-size: 10.5pt;
+    color: #333;
+    margin-top: 12px;
+  }
+  
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.5pt;
+    margin: 8px 0;
+  }
+  th {
+    background: #0064b8;
+    color: white;
+    padding: 5px 8px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td {
+    padding: 4px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #f7f9fc; }
+  
+  /* Code */
+  pre {
+    background: #f4f4f8;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-size: 8pt;
+    line-height: 1.4;
+    overflow-x: auto;
+    margin: 6px 0;
+  }
+  code { font-family: 'Cascadia Code', Consolas, monospace; }
+  code.inline {
+    background: #eef;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 8.5pt;
+  }
+  
+  /* Lists */
+  ul {
+    margin: 4px 0;
+    padding-left: 18px;
+  }
+  li {
+    margin: 2px 0;
+    font-size: 9.5pt;
+  }
+  
+  /* Paragraphs */
+  p { margin: 4px 0; font-size: 9.5pt; }
+  
+  hr.section-break {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 15px 0;
+  }
+  
+  .no-print {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #0078d4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12pt;
+    z-index: 1000;
+  }
+  .no-print:hover { background: #005a9e; }
+</style>
+</head>
+<body>
+
+<button class="no-print" onclick="window.print()">Print / Save as PDF</button>
+
+<div class="cover">
+  <h1>SnowPro Core COF-C03</h1>
+  <h2>Complete Study Guide</h2>
+  <table class="cover-table">
+    <tr><th>Domain</th><th>Topic</th><th>Weight</th></tr>
+    <tr><td>1</td><td>Snowflake AI Data Cloud Features &amp; Architecture</td><td>25%</td></tr>
+    <tr><td>2</td><td>Account Access and Security</td><td>20%</td></tr>
+    <tr><td>3</td><td>Performance Concepts</td><td>15%</td></tr>
+    <tr><td>4</td><td>Data Loading and Unloading</td><td>10%</td></tr>
+    <tr><td>5</td><td>Data Transformations</td><td>20%</td></tr>
+    <tr><td>6</td><td>Data Protection and Data Sharing</td><td>10%</td></tr>
+  </table>
+  <p class="subtitle">Verified against Snowflake documentation &mdash; September 2026</p>
+</div>
+
+<section class="domain">
+<h1 class="domain-title">Domain 1: Snowflake AI Data Cloud Features & Architecture (25%)</h1>
+
+<h2>1.1 Cloud Architecture (Three-Layer Model)</h2>
+
+<h3>Storage Layer</h3>
+<ul>
+<li><strong>Columnar storage</strong> -- data stored in micro-partitions (50-500 MB compressed)</li>
+<li>Snowflake manages all storage; users cannot access underlying files directly</li>
+<li>Data is automatically compressed (no user action needed)</li>
+<li>Storage is billed separately from compute</li>
+<li>Data is stored in cloud provider's blob storage (S3, Azure Blob, GCS)</li>
+</ul>
+
+<h3>Compute Layer (Query Processing)</h3>
+<ul>
+<li><strong>Virtual Warehouses</strong> execute queries</li>
+<li>Warehouses are independent MPP clusters</li>
+<li>Warehouses can be started/stopped/resized without affecting other warehouses</li>
+<li>Scaling: <strong>Scale Up</strong> (bigger size) for complex queries, <strong>Scale Out</strong> (multi-cluster) for concurrency</li>
+<li>Warehouse sizes: X-Small, Small, Medium, Large, X-Large, 2XL, 3XL, 4XL, 5XL, 6XL</li>
+</ul>
+
+<h3>Cloud Services Layer</h3>
+<ul>
+<li>Authentication and access control</li>
+<li>Infrastructure management</li>
+<li>Metadata management</li>
+<li>Query parsing and optimization</li>
+<li><strong>Billed only if usage exceeds 10% of total compute credit usage</strong></li>
+</ul>
+
+<hr class="section-break">
+
+<h2>1.2 Snowflake Editions</h2>
+
+<table>
+<thead><tr>
+<th>Feature</th>
+<th>Standard</th>
+<th>Enterprise</th>
+<th>Business Critical</th>
+<th>VPS</th>
+</tr></thead><tbody>
+<tr>
+<td>Time Travel</td>
+<td>1 day</td>
+<td>90 days</td>
+<td>90 days</td>
+<td>90 days</td>
+</tr>
+<tr>
+<td>Multi-cluster warehouses</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Materialized views</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Column-level security</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Search optimization</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Failover/Failback</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Tri-Secret Secure</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>HIPAA/PCI DSS</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Customer-managed keys</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Dedicated VPS</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+
+<hr class="section-break">
+
+<h2>1.3 Micro-Partitions</h2>
+
+<ul>
+<li>Contiguous units of storage (50-500 MB compressed)</li>
+<li>Organized in a <strong>columnar</strong> format within each partition</li>
+<li>Snowflake automatically creates and maintains micro-partitions</li>
+<li><strong>Pruning</strong>: Snowflake skips irrelevant partitions using min/max metadata</li>
+<li>You CANNOT manually control partitioning (Snowflake manages it)</li>
+<li><strong>Clustering keys</strong> influence how data is organized within partitions</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>1.4 Data Types</h2>
+
+<h3>Structured</h3>
+<ul>
+<li>NUMBER, INT, FLOAT, DECIMAL</li>
+<li>VARCHAR, CHAR, STRING, TEXT</li>
+<li>BOOLEAN</li>
+<li>DATE, TIME, TIMESTAMP (TIMESTAMP_LTZ, TIMESTAMP_NTZ, TIMESTAMP_TZ)</li>
+<li>BINARY, VARBINARY</li>
+</ul>
+
+<h3>Semi-Structured</h3>
+<ul>
+<li><strong>VARIANT</strong> -- can store any JSON, Avro, ORC, Parquet, or XML value (up to 16 MB)</li>
+<li><strong>OBJECT</strong> -- key-value pairs (like JSON object)</li>
+<li><strong>ARRAY</strong> -- ordered list of values</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>1.5 Table Types</h2>
+
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Time Travel</th>
+<th>Fail-Safe</th>
+<th>Persists After Session</th>
+<th>CDL Cost</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Permanent</strong></td>
+<td>0-90 days (Enterprise+)</td>
+<td>7 days</td>
+<td>Yes</td>
+<td>Full</td>
+</tr>
+<tr>
+<td><strong>Transient</strong></td>
+<td>0-1 day</td>
+<td>0 days</td>
+<td>Yes</td>
+<td>Reduced</td>
+</tr>
+<tr>
+<td><strong>Temporary</strong></td>
+<td>0-1 day</td>
+<td>0 days</td>
+<td>No (session only)</td>
+<td>Minimal</td>
+</tr>
+<tr>
+<td><strong>External</strong></td>
+<td>No</td>
+<td>No</td>
+<td>N/A (data external)</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<hr class="section-break">
+
+<h2>1.6 Views</h2>
+
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Definition Visible?</th>
+<th>Uses Warehouse Credits?</th>
+<th>Can Improve Performance?</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Standard View</strong></td>
+<td>Yes (via SHOW/GET_DDL)</td>
+<td>Yes (runs query each time)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Secure View</strong></td>
+<td>No (hidden from consumers)</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Materialized View</strong></td>
+<td>Yes</td>
+<td>Yes (for refresh)</td>
+<td>Yes (precomputed)</td>
+</tr>
+</tbody></table>
+
+<hr class="section-break">
+
+<h2>1.7 Virtual Warehouses</h2>
+
+<h3>Key Concepts</h3>
+<ul>
+<li>Each size doubling approximately doubles credits/hour and compute power</li>
+<li>X-Small = 1 credit/hour, Small = 2, Medium = 4, Large = 8...</li>
+<li><strong>Auto-suspend</strong>: shuts down after period of inactivity (default 10 min, minimum 1 min for non-serverless)</li>
+<li><strong>Auto-resume</strong>: starts when a query is submitted</li>
+<li>Credit billing is per-second (60-second minimum)</li>
+</ul>
+
+<h3>Multi-Cluster Warehouses (Enterprise+)</h3>
+<ul>
+<li><strong>Scaling Policy: Standard</strong> (default) -- adds clusters aggressively, favors performance over cost (minimizes queuing)</li>
+<li><strong>Scaling Policy: Economy</strong> -- adds clusters only when queuing is significant (~6 min estimated), favors cost over performance</li>
+<li>Min/Max cluster count controls</li>
+</ul>
+
+<h3>Warehouse Types</h3>
+<ul>
+<li><strong>Standard</strong> -- general-purpose</li>
+<li><strong>Snowpark-Optimized</strong> -- for memory-intensive operations (ML, large data processing)</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>1.8 Resource Monitors</h2>
+
+<ul>
+<li>Track credit usage by warehouse or account</li>
+<li>Actions at thresholds: <strong>Notify</strong>, <strong>Notify & Suspend</strong>, <strong>Notify & Suspend Immediately</strong></li>
+<li>Can be set at account or warehouse level</li>
+<li>Only ACCOUNTADMIN can create resource monitors</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>1.9 Caching</h2>
+
+<table>
+<thead><tr>
+<th>Cache Type</th>
+<th>Location</th>
+<th>Duration</th>
+<th>Reuse Condition</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Metadata Cache</strong></td>
+<td>Cloud Services</td>
+<td>Persistent</td>
+<td>COUNT, MIN, MAX on same table</td>
+</tr>
+<tr>
+<td><strong>Result Cache</strong></td>
+<td>Cloud Services</td>
+<td>24 hours</td>
+<td>Same query, same role, no underlying data change</td>
+</tr>
+<tr>
+<td><strong>Local Disk Cache (Warehouse)</strong></td>
+<td>Compute Nodes</td>
+<td>While WH running</td>
+<td>Same warehouse runs query touching same data</td>
+</tr>
+</tbody></table>
+
+<p><strong>Key exam point</strong>: Result cache does NOT consume warehouse credits. It is served from cloud services layer.</p>
+
+<hr class="section-break">
+
+<h2>1.10 Stages</h2>
+
+<table>
+<thead><tr>
+<th>Stage Type</th>
+<th>Scope</th>
+<th>Location</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>User Stage</strong> (<code class="inline">@~</code>)</td>
+<td>Per user</td>
+<td>Internal (Snowflake-managed)</td>
+</tr>
+<tr>
+<td><strong>Table Stage</strong> (<code class="inline">@%table_name</code>)</td>
+<td>Per table</td>
+<td>Internal (Snowflake-managed)</td>
+</tr>
+<tr>
+<td><strong>Named Internal Stage</strong> (<code class="inline">@stage_name</code>)</td>
+<td>Explicit object</td>
+<td>Internal (Snowflake-managed)</td>
+</tr>
+<tr>
+<td><strong>Named External Stage</strong> (<code class="inline">@stage_name</code>)</td>
+<td>Explicit object</td>
+<td>S3, Azure Blob, GCS</td>
+</tr>
+</tbody></table>
+
+<hr class="section-break">
+
+<h2>1.11 Snowflake Features</h2>
+
+<h3>Streams (Change Data Capture)</h3>
+<ul>
+<li>Track DML changes (INSERT, UPDATE, DELETE) on a table</li>
+<li>Types: <strong>Standard</strong>, <strong>Append-only</strong>, <strong>Insert-only</strong> (for external tables)</li>
+<li>Creates a "change table" that records before/after row states</li>
+</ul>
+
+<h3>Tasks</h3>
+<ul>
+<li>Schedule SQL execution (standalone or in DAGs)</li>
+<li>Can use cron or interval schedules</li>
+<li>Triggered by streams (WHEN SYSTEM$STREAM_HAS_DATA)</li>
+<li>Can use serverless compute (no warehouse needed)</li>
+</ul>
+
+<h3>Snowpipe</h3>
+<ul>
+<li>Continuous, serverless data loading</li>
+<li>Triggered by cloud event notifications (S3 SQS, Azure Event Grid, GCS Pub/Sub)</li>
+<li>Uses serverless compute (no virtual warehouse)</li>
+<li>Near real-time loading (within minutes)</li>
+</ul>
+
+<h3>Stored Procedures</h3>
+<ul>
+<li>Written in JavaScript, SQL, Python, Java, Scala</li>
+<li>Can run as <strong>caller's rights</strong> or <strong>owner's rights</strong></li>
+</ul>
+
+<h3>UDFs (User-Defined Functions)</h3>
+<ul>
+<li>Written in SQL, JavaScript, Python, Java, Scala</li>
+<li>Can be scalar or tabular (UDTFs)</li>
+<li>Cannot perform DML (unlike stored procedures)</li>
+</ul>
+
+</section>
+<div class="page-break"></div>
+<section class="domain">
+<h1 class="domain-title">Domain 2: Account Access and Security (20%)</h1>
+
+<h2>2.1 Authentication Methods</h2>
+
+<table>
+<thead><tr>
+<th>Method</th>
+<th>Description</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Username/Password</strong></td>
+<td>Default, basic authentication</td>
+</tr>
+<tr>
+<td><strong>MFA</strong></td>
+<td>Multi-factor via Duo Mobile; can be enforced per user</td>
+</tr>
+<tr>
+<td><strong>SSO (SAML 2.0)</strong></td>
+<td>Federated via Okta, Azure AD, ADFS, etc.</td>
+</tr>
+<tr>
+<td><strong>Key-Pair Authentication</strong></td>
+<td>RSA 2048-bit; for service accounts and programmatic access</td>
+</tr>
+<tr>
+<td><strong>OAuth</strong></td>
+<td>External OAuth or Snowflake OAuth for clients</td>
+</tr>
+</tbody></table>
+
+<p><strong>Key exam point</strong>: MFA is powered by Duo Security (built into Snowflake). Users must self-enroll or be enrolled by admin.</p>
+
+<hr class="section-break">
+
+<h2>2.2 Role-Based Access Control (RBAC)</h2>
+
+<h3>System-Defined Roles (Hierarchy)</h3>
+
+<pre><code>
+ACCOUNTADMIN
+
+├── SYSADMIN
+
+│   └── (all custom roles should be granted to SYSADMIN)
+
+├── SECURITYADMIN
+
+│   └── USERADMIN
+
+└── PUBLIC (granted to every user automatically)
+
+</code></pre>
+
+<h3>Role Descriptions</h3>
+
+<table>
+<thead><tr>
+<th>Role</th>
+<th>Purpose</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>ACCOUNTADMIN</strong></td>
+<td>Top-level role. Combines SYSADMIN + SECURITYADMIN. Use sparingly.</td>
+</tr>
+<tr>
+<td><strong>SYSADMIN</strong></td>
+<td>Create/manage databases, schemas, warehouses, and all objects</td>
+</tr>
+<tr>
+<td><strong>SECURITYADMIN</strong></td>
+<td>Manage grants, create/manage roles. Has MANAGE GRANTS privilege.</td>
+</tr>
+<tr>
+<td><strong>USERADMIN</strong></td>
+<td>Create/manage users and roles (but not grant privileges on objects)</td>
+</tr>
+<tr>
+<td><strong>PUBLIC</strong></td>
+<td>Automatically granted to all users. Minimal privileges.</td>
+</tr>
+<tr>
+<td><strong>ORGADMIN</strong></td>
+<td>Manage accounts within a Snowflake organization</td>
+</tr>
+</tbody></table>
+
+<h3>Best Practices</h3>
+<ul>
+<li>Custom roles should be granted to SYSADMIN (so SYSADMIN can manage their objects)</li>
+<li>ACCOUNTADMIN should NOT be default role for any user</li>
+<li>Use ACCOUNTADMIN only when necessary</li>
+<li>Grant least privilege needed</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>2.3 Privileges</h2>
+
+<h3>Object Privilege Hierarchy</h3>
+<pre><code>
+ACCOUNT → DATABASE → SCHEMA → Objects (TABLE, VIEW, STAGE, etc.)
+
+</code></pre>
+
+<h3>Key Privileges</h3>
+<ul>
+<li><strong>USAGE</strong> -- required on database/schema before accessing any object inside</li>
+<li><strong>SELECT</strong> -- read data from table/view</li>
+<li><strong>INSERT/UPDATE/DELETE</strong> -- modify data</li>
+<li><strong>CREATE &lt;object&gt;</strong> -- create new objects in schema</li>
+<li><strong>OWNERSHIP</strong> -- full control, can grant privileges to others</li>
+<li><strong>OPERATE</strong> -- start/stop/resume warehouses</li>
+<li><strong>MONITOR</strong> -- view usage/history on warehouses</li>
+</ul>
+
+<h3>Future Grants</h3>
+<ul>
+<li>Pre-grant privileges on objects that will be created in the future</li>
+<li><code class="inline">GRANT SELECT ON FUTURE TABLES IN SCHEMA mydb.myschema TO ROLE analyst;</code></li>
+</ul>
+
+<hr class="section-break">
+
+<h2>2.4 Network Policies</h2>
+
+<ul>
+<li>Restrict access by IP address (allow/deny lists)</li>
+<li>Can be applied at <strong>account level</strong> or <strong>user level</strong></li>
+<li>User-level policies override account-level policies</li>
+<li>Use CIDR notation (e.g., 192.168.1.0/24)</li>
+<li>Only SECURITYADMIN or ACCOUNTADMIN can create network policies</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>2.5 Encryption</h2>
+
+<ul>
+<li><strong>Always-on encryption</strong> -- all data encrypted at rest and in transit</li>
+<li>AES-256 encryption for data at rest</li>
+<li>TLS 1.2 for data in transit</li>
+<li><strong>Automatic key rotation</strong> every 30 days (Snowflake-managed keys)</li>
+<li><strong>Tri-Secret Secure</strong> (Business Critical+): customer-managed key + Snowflake key = composite key</li>
+<li><strong>Periodic re-keying</strong> (Enterprise+): re-encrypts data with new keys annually</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>2.6 Column-Level Security</h2>
+
+<h3>Dynamic Data Masking (Enterprise+)</h3>
+<ul>
+<li>Apply masking policies to columns</li>
+<li>Different users see masked/unmasked data based on role</li>
+<li>Policy is a SQL function that returns masked or real value</li>
+<li>Can be applied to multiple columns across tables</li>
+</ul>
+
+<h3>External Tokenization (Enterprise+)</h3>
+<ul>
+<li>Replace sensitive data with tokens using external tokenization service</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>2.7 Row Access Policies (Enterprise+)</h2>
+<ul>
+<li>Control which rows users can see</li>
+<li>Policy returns a boolean filter condition</li>
+<li>Applied to a table; evaluated at query time</li>
+<li>Can use mapping tables for complex access rules</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>2.8 Object Tagging</h2>
+<ul>
+<li>Apply tags to objects for governance and classification</li>
+<li>Tag-based masking: attach masking policies to tags</li>
+<li>When a tagged column is queried, the masking policy fires automatically</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>2.9 Access History</h2>
+<ul>
+<li><code class="inline">SNOWFLAKE.ACCOUNT_USAGE.ACCESS_HISTORY</code> view</li>
+<li>Records who accessed what data and when</li>
+<li>Includes direct and indirect access (through views, etc.)</li>
+<li>Retained for 365 days</li>
+</ul>
+
+</section>
+<div class="page-break"></div>
+<section class="domain">
+<h1 class="domain-title">Domain 3: Performance Concepts (15%)</h1>
+
+<h2>3.1 Query Performance Optimization</h2>
+
+<h3>Query Profile</h3>
+<ul>
+<li>Visual tool in Snowsight showing query execution plan</li>
+<li>Shows operators, data flow, and performance statistics</li>
+<li>Key metrics: <strong>bytes scanned</strong>, <strong>partitions scanned/total</strong>, <strong>bytes spilled</strong></li>
+<li><strong>Spilling</strong> to local/remote storage = warehouse may be too small</li>
+</ul>
+
+<h3>Query History</h3>
+<ul>
+<li>Available in Snowsight and via QUERY_HISTORY views</li>
+<li>Filter by user, warehouse, status, duration</li>
+<li>Shows execution time breakdown</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>3.2 Warehouse Sizing Strategy</h2>
+
+<table>
+<thead><tr>
+<th>Symptom</th>
+<th>Action</th>
+</tr></thead><tbody>
+<tr>
+<td>Queries are slow (single large query)</td>
+<td><strong>Scale Up</strong> -- use larger warehouse</td>
+</tr>
+<tr>
+<td>Too many concurrent queries queuing</td>
+<td><strong>Scale Out</strong> -- enable multi-cluster</td>
+</tr>
+<tr>
+<td>Simple queries on small data are slow</td>
+<td>Check caching; might be warehouse startup time</td>
+</tr>
+<tr>
+<td>Queries spilling to disk</td>
+<td><strong>Scale Up</strong> -- more memory/compute needed</td>
+</tr>
+</tbody></table>
+
+<h3>Key Sizing Facts</h3>
+<ul>
+<li>Each size doubling = ~2x the compute power</li>
+<li>A query that takes 1 hour on X-Small might take ~30 min on Small</li>
+<li>Credit cost also doubles per size increase</li>
+<li>Bigger is NOT always better -- match warehouse to workload</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>3.3 Caching (Deep Dive)</h2>
+
+<h3>Metadata Cache</h3>
+<ul>
+<li>Maintained in cloud services layer</li>
+<li>FREE (no warehouse needed)</li>
+<li>Answers: COUNT(*), MIN(col), MAX(col), COUNT(DISTINCT col) on unchanged tables</li>
+<li>Works because Snowflake stores metadata about every micro-partition</li>
+</ul>
+
+<h3>Result Cache</h3>
+<ul>
+<li>Exact same query + same role + data unchanged = cached result</li>
+<li>Valid for 24 hours</li>
+<li>FREE (no warehouse credits consumed)</li>
+<li>Resets if underlying data changes</li>
+<li><strong>Cannot be disabled</strong> (always on)</li>
+<li>Works across warehouses (it's in cloud services)</li>
+</ul>
+
+<h3>Warehouse Local Disk Cache</h3>
+<ul>
+<li>SSD cache on compute nodes</li>
+<li>Caches raw data read from storage</li>
+<li>Only available while warehouse is running (lost on suspend)</li>
+<li>Same warehouse must be used</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>3.4 Clustering</h2>
+
+<h3>Micro-Partition Pruning</h3>
+<ul>
+<li>Snowflake stores MIN/MAX values per column per micro-partition</li>
+<li>Filter predicates enable skipping irrelevant partitions</li>
+<li>Natural clustering: data loaded in order often clusters well on load-time columns</li>
+</ul>
+
+<h3>Clustering Keys (Enterprise+)</h3>
+<ul>
+<li>Define columns to organize data within micro-partitions</li>
+<li><strong>Automatic Clustering</strong> maintains the clustering over time (serverless, background)</li>
+<li>Best for: large tables (multi-TB) with known, frequent filter columns</li>
+<li>Costs credits for ongoing maintenance</li>
+<li><code class="inline">SYSTEM$CLUSTERING_INFORMATION</code> -- check clustering quality</li>
+<li><code class="inline">SYSTEM$CLUSTERING_DEPTH</code> -- check depth (lower is better, 1-2 is ideal)</li>
+</ul>
+
+<h3>When to Use Clustering Keys</h3>
+<ul>
+<li>Table is very large (hundreds of GB+)</li>
+<li>Queries frequently filter on specific columns</li>
+<li>Clustering depth is high (data is poorly clustered)</li>
+<li><strong>Do NOT cluster</strong> small tables or tables that are frequently fully scanned</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>3.5 Search Optimization Service (Enterprise+)</h2>
+
+<ul>
+<li>Server-side feature for point-lookup queries (equality, IN, LIKE)</li>
+<li>Works on columns with high cardinality</li>
+<li>Serverless (Snowflake manages compute)</li>
+<li>Costs storage + compute credits</li>
+<li>Best for: selective lookups on columns NOT well-suited for clustering</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>3.6 Materialized Views (Enterprise+)</h2>
+
+<ul>
+<li>Precomputed query results stored as a table</li>
+<li>Automatically refreshed when base table changes (serverless background)</li>
+<li>Best for: expensive queries on frequently-read, slowly-changing data</li>
+<li>Limitations:</li>
+<li>Based on a single table only (can be a regular table OR an external table)</li>
+<li>Limited SQL support (no joins, UDFs, HAVING, ORDER BY, LIMIT)</li>
+<li>Cannot be based on other views</li>
+<li>External table MVs require manual or auto-refresh of file metadata</li>
+<li>Cost: storage + serverless maintenance credits</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>3.7 Query Acceleration Service (Enterprise+)</h2>
+
+<ul>
+<li>Offloads portions of a query to shared compute resources</li>
+<li><strong>Requires Enterprise edition or higher</strong></li>
+<li>Best for: queries with large scans that return small results</li>
+<li>Controlled by <code class="inline">ENABLE_QUERY_ACCELERATION</code> warehouse parameter</li>
+<li>Scale factor controls maximum resources (0-10, default 8; 0 = no limit)</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>3.8 Performance Best Practices Summary</h2>
+
+<ul class="numbered">
+<li><strong>1.</strong> Right-size warehouses to workloads (dedicated WH per workload type)</li>
+<li><strong>2.</strong> Enable auto-suspend and auto-resume</li>
+<li><strong>3.</strong> Use clustering keys on large, frequently filtered tables</li>
+<li><strong>4.</strong> Leverage result cache (ensure consistent query text)</li>
+<li><strong>5.</strong> Use materialized views for expensive repeated computations</li>
+<li><strong>6.</strong> Monitor query profile for spilling and full table scans</li>
+<li><strong>7.</strong> Separate ETL and reporting warehouses</li>
+</ul>
+
+</section>
+<div class="page-break"></div>
+<section class="domain">
+<h1 class="domain-title">Domain 4: Data Loading and Unloading (10%)</h1>
+
+<h2>4.1 Bulk Loading with COPY INTO</h2>
+
+<h3>Basic Syntax</h3>
+<pre><code>
+COPY INTO my_table
+
+FROM @my_stage/path/
+
+FILE_FORMAT = (TYPE = CSV FIELD_DELIMITER = ',' SKIP_HEADER = 1)
+
+ON_ERROR = 'CONTINUE';
+
+</code></pre>
+
+<h3>Key Options</h3>
+
+<table>
+<thead><tr>
+<th>Option</th>
+<th>Values</th>
+<th>Default</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>ON_ERROR</strong></td>
+<td>CONTINUE, SKIP_FILE, SKIP_FILE_n, ABORT_STATEMENT</td>
+<td>ABORT_STATEMENT</td>
+</tr>
+<tr>
+<td><strong>PURGE</strong></td>
+<td>TRUE/FALSE -- delete files after successful load</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td><strong>FORCE</strong></td>
+<td>TRUE/FALSE -- reload already-loaded files</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td><strong>VALIDATION_MODE</strong></td>
+<td>RETURN_n_ROWS, RETURN_ERRORS, RETURN_ALL_ERRORS</td>
+<td>(none)</td>
+</tr>
+<tr>
+<td><strong>SIZE_LIMIT</strong></td>
+<td>Max bytes to load (stops after threshold)</td>
+<td>(none)</td>
+</tr>
+<tr>
+<td><strong>MATCH_BY_COLUMN_NAME</strong></td>
+<td>CASE_SENSITIVE, CASE_INSENSITIVE, NONE</td>
+<td>NONE</td>
+</tr>
+</tbody></table>
+
+<h3>Load Metadata</h3>
+<ul>
+<li>Snowflake tracks which files have been loaded (64 days by default)</li>
+<li>Re-running COPY won't reload the same files (unless FORCE=TRUE)</li>
+<li>Use <code class="inline">LOAD_HISTORY</code> view to see load status</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>4.2 File Formats</h2>
+
+<table>
+<thead><tr>
+<th>Format</th>
+<th>Structured?</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>CSV</strong></td>
+<td>Yes</td>
+<td>Most common; configurable delimiters</td>
+</tr>
+<tr>
+<td><strong>JSON</strong></td>
+<td>Semi-structured</td>
+<td>Loaded into VARIANT column or flatten during load</td>
+</tr>
+<tr>
+<td><strong>Parquet</strong></td>
+<td>Semi-structured</td>
+<td>Columnar; efficient for analytics</td>
+</tr>
+<tr>
+<td><strong>Avro</strong></td>
+<td>Semi-structured</td>
+<td>Row-based; schema embedded</td>
+</tr>
+<tr>
+<td><strong>ORC</strong></td>
+<td>Semi-structured</td>
+<td>Columnar; common in Hadoop</td>
+</tr>
+<tr>
+<td><strong>XML</strong></td>
+<td>Semi-structured</td>
+<td>Hierarchical</td>
+</tr>
+</tbody></table>
+
+<h3>Named File Format Objects</h3>
+<pre><code>
+CREATE FILE FORMAT my_csv_format
+
+  TYPE = CSV
+
+  FIELD_DELIMITER = ','
+
+  SKIP_HEADER = 1
+
+  NULL_IF = ('NULL', 'null', '');
+
+</code></pre>
+
+<hr class="section-break">
+
+<h2>4.3 Staging Data</h2>
+
+<h3>PUT Command (Internal Stages Only)</h3>
+<pre><code>
+PUT file://C:/data/myfile.csv @my_stage AUTO_COMPRESS=TRUE;
+
+</code></pre>
+<ul>
+<li>Uploads local files to internal stages</li>
+<li>Auto-compresses with gzip by default</li>
+<li>Only from SnowSQL or drivers (NOT Snowsight)</li>
+</ul>
+
+<h3>GET Command (Internal Stages Only)</h3>
+<pre><code>
+GET @my_stage/myfile.csv.gz file://C:/downloads/;
+
+</code></pre>
+<ul>
+<li>Downloads files from internal stage to local filesystem</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>4.4 Snowpipe (Continuous Loading)</h2>
+
+<h3>How It Works</h3>
+<ul class="numbered">
+<li><strong>1.</strong> Files land in a stage (S3, Azure Blob, GCS)</li>
+<li><strong>2.</strong> Cloud event notification triggers Snowpipe</li>
+<li><strong>3.</strong> Snowpipe loads data using serverless compute</li>
+<li><strong>4.</strong> Near real-time latency (typically within minutes)</li>
+</ul>
+
+<h3>Key Facts</h3>
+<ul>
+<li><strong>Serverless</strong> -- no virtual warehouse required</li>
+<li>Uses a PIPE object with a COPY INTO definition</li>
+<li>Cost: per-file compute charge (cheaper than warehouse for small frequent loads)</li>
+<li>Cannot use VALIDATION_MODE</li>
+<li>Files are loaded in <strong>best-effort order</strong> (not guaranteed order)</li>
+<li>Use <code class="inline">SYSTEM$PIPE_STATUS</code> to check pipe health</li>
+</ul>
+
+<h3>REST API Alternative</h3>
+<ul>
+<li>Call Snowpipe REST API <code class="inline">insertFiles</code> endpoint to trigger loading</li>
+<li>No cloud notifications needed (polling-based)</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>4.5 Data Transformation During Load</h2>
+
+<h3>COPY INTO with SELECT</h3>
+<pre><code>
+COPY INTO my_table (col1, col2, col3)
+
+FROM (
+
+  SELECT $1, $2, TO_DATE($3, 'YYYY-MM-DD')
+
+  FROM @my_stage/data.csv
+
+)
+
+FILE_FORMAT = (TYPE = CSV);
+
+</code></pre>
+
+<ul>
+<li>Can select specific columns, reorder, cast, transform</li>
+<li>Column references: <code class="inline">$1, $2, $3...</code> for CSV (positional)</li>
+<li>For semi-structured: <code class="inline">$1:field_name</code> for JSON/Parquet</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>4.6 Data Unloading</h2>
+
+<h3>COPY INTO &lt;location&gt;</h3>
+<pre><code>
+COPY INTO @my_stage/export/
+
+FROM my_table
+
+FILE_FORMAT = (TYPE = CSV COMPRESSION = GZIP)
+
+HEADER = TRUE
+
+OVERWRITE = TRUE
+
+MAX_FILE_SIZE = 100000000;
+
+</code></pre>
+
+<h3>Key Unloading Options</h3>
+<ul>
+<li><strong>SINGLE</strong> = TRUE/FALSE -- output as single file or multiple</li>
+<li><strong>MAX_FILE_SIZE</strong> -- max size per output file (default 16 MB)</li>
+<li><strong>HEADER</strong> -- include column headers (CSV)</li>
+<li><strong>OVERWRITE</strong> -- replace existing files</li>
+<li><strong>PARTITION BY</strong> -- partition output files by expression</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>4.7 Data Loading Best Practices</h2>
+
+<ul class="numbered">
+<li><strong>1.</strong> <strong>File sizing</strong>: Aim for 100-250 MB compressed files</li>
+<li><strong>2.</strong> <strong>Number of files</strong>: Match to number of warehouse nodes for parallel loading</li>
+<li><strong>3.</strong> Use <strong>dedicated loading warehouse</strong> separate from query warehouse</li>
+<li><strong>4.</strong> Enable <strong>PURGE=TRUE</strong> for automated cleanup in production</li>
+<li><strong>5.</strong> Use <strong>Snowpipe</strong> for continuous, real-time-ish ingestion</li>
+<li><strong>6.</strong> Use <strong>VALIDATION_MODE</strong> to preview errors before full load</li>
+<li><strong>7.</strong> Prefer semi-structured native types (VARIANT) for JSON/Parquet</li>
+</ul>
+
+</section>
+<div class="page-break"></div>
+<section class="domain">
+<h1 class="domain-title">Domain 5: Data Transformations (20%)</h1>
+
+<h2>5.1 DML Operations</h2>
+
+<h3>INSERT</h3>
+<pre><code>
+INSERT INTO target_table (col1, col2) VALUES (1, 'abc');
+
+INSERT INTO target_table SELECT * FROM source_table;
+
+</code></pre>
+
+<h3>UPDATE</h3>
+<pre><code>
+UPDATE my_table SET status = 'active' WHERE created_date &gt; '2024-01-01';
+
+</code></pre>
+
+<h3>DELETE</h3>
+<pre><code>
+DELETE FROM my_table WHERE status = 'inactive';
+
+</code></pre>
+
+<h3>MERGE (Upsert)</h3>
+<pre><code>
+MERGE INTO target t
+
+USING source s ON t.id = s.id
+
+WHEN MATCHED THEN UPDATE SET t.name = s.name
+
+WHEN NOT MATCHED THEN INSERT (id, name) VALUES (s.id, s.name);
+
+</code></pre>
+
+<h3>TRUNCATE</h3>
+<pre><code>
+TRUNCATE TABLE my_table;  -- Removes all rows, resets table
+
+</code></pre>
+
+<p><strong>Key difference</strong>: DELETE is DML (logged, recoverable with Time Travel). TRUNCATE is DDL (faster, also supports Time Travel).</p>
+
+<hr class="section-break">
+
+<h2>5.2 Common Table Expressions (CTEs)</h2>
+
+<pre><code>
+WITH sales_cte AS (
+
+  SELECT region, SUM(amount) AS total_sales
+
+  FROM sales
+
+  GROUP BY region
+
+)
+
+SELECT * FROM sales_cte WHERE total_sales &gt; 100000;
+
+</code></pre>
+
+<ul>
+<li>Temporary, named result sets within a single query</li>
+<li>Improve readability of complex queries</li>
+<li>Can be referenced multiple times in the same query</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>5.3 Window Functions</h2>
+
+<h3>Syntax</h3>
+<pre><code>
+function_name() OVER (
+
+  [PARTITION BY col1, col2]
+
+  [ORDER BY col3 [ASC|DESC]]
+
+  [ROWS|RANGE BETWEEN ... AND ...]
+
+)
+
+</code></pre>
+
+<h3>Common Functions</h3>
+<table>
+<thead><tr>
+<th>Function</th>
+<th>Purpose</th>
+</tr></thead><tbody>
+<tr>
+<td><code class="inline">ROW_NUMBER()</code></td>
+<td>Unique sequential number per partition</td>
+</tr>
+<tr>
+<td><code class="inline">RANK()</code></td>
+<td>Rank with gaps on ties</td>
+</tr>
+<tr>
+<td><code class="inline">DENSE_RANK()</code></td>
+<td>Rank without gaps on ties</td>
+</tr>
+<tr>
+<td><code class="inline">NTILE(n)</code></td>
+<td>Divide into n buckets</td>
+</tr>
+<tr>
+<td><code class="inline">LEAD(col, n)</code></td>
+<td>Value from n rows ahead</td>
+</tr>
+<tr>
+<td><code class="inline">LAG(col, n)</code></td>
+<td>Value from n rows behind</td>
+</tr>
+<tr>
+<td><code class="inline">FIRST_VALUE(col)</code></td>
+<td>First value in window</td>
+</tr>
+<tr>
+<td><code class="inline">LAST_VALUE(col)</code></td>
+<td>Last value in window</td>
+</tr>
+<tr>
+<td><code class="inline">SUM/AVG/COUNT()</code></td>
+<td>Running aggregates</td>
+</tr>
+</tbody></table>
+
+<h3>QUALIFY Clause (Snowflake-specific)</h3>
+<pre><code>
+SELECT id, name, region,
+
+       ROW_NUMBER() OVER (PARTITION BY region ORDER BY sales DESC) AS rn
+
+FROM employees
+
+QUALIFY rn = 1;  -- Keep only top seller per region
+
+</code></pre>
+<ul>
+<li>Filters results of window functions</li>
+<li>Like HAVING for GROUP BY, but for window functions</li>
+<li>Eliminates the need for subqueries</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>5.4 Semi-Structured Data</h2>
+
+<h3>VARIANT Data Type</h3>
+<pre><code>
+CREATE TABLE events (
+
+  id INT,
+
+  data VARIANT
+
+);
+
+
+
+INSERT INTO events SELECT 1, PARSE_JSON('{"name":"John","age":30}');
+
+</code></pre>
+
+<h3>Querying Semi-Structured Data</h3>
+<pre><code>
+-- Dot notation
+
+SELECT data:name::STRING, data:age::INT FROM events;
+
+
+
+-- Bracket notation
+
+SELECT data['name']::STRING FROM events;
+
+
+
+-- Nested
+
+SELECT data:address.city::STRING FROM events;
+
+</code></pre>
+
+<h3>FLATTEN (Critical for Exam!)</h3>
+<pre><code>
+-- Array flattening
+
+SELECT f.value::STRING AS item
+
+FROM orders,
+
+LATERAL FLATTEN(input =&gt; order_items) f;
+
+
+
+-- Nested flattening
+
+SELECT f.value:name::STRING
+
+FROM events,
+
+LATERAL FLATTEN(input =&gt; data:employees) f;
+
+</code></pre>
+
+<h3>FLATTEN Output Columns</h3>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Description</th>
+</tr></thead><tbody>
+<tr>
+<td><code class="inline">SEQ</code></td>
+<td>Sequence number</td>
+</tr>
+<tr>
+<td><code class="inline">KEY</code></td>
+<td>Key for maps, index for arrays</td>
+</tr>
+<tr>
+<td><code class="inline">PATH</code></td>
+<td>Path to the element</td>
+</tr>
+<tr>
+<td><code class="inline">INDEX</code></td>
+<td>Array index (null for objects)</td>
+</tr>
+<tr>
+<td><code class="inline">VALUE</code></td>
+<td>The flattened value</td>
+</tr>
+<tr>
+<td><code class="inline">THIS</code></td>
+<td>The element being flattened</td>
+</tr>
+</tbody></table>
+
+<h3>Type Casting from VARIANT</h3>
+<pre><code>
+data:field::STRING     -- Cast to string
+
+data:field::NUMBER     -- Cast to number
+
+data:field::BOOLEAN    -- Cast to boolean
+
+data:field::TIMESTAMP  -- Cast to timestamp
+
+</code></pre>
+
+<p>Always cast VARIANT fields to specific types for proper comparison and aggregation.</p>
+
+<hr class="section-break">
+
+<h2>5.5 String Functions</h2>
+
+<table>
+<thead><tr>
+<th>Function</th>
+<th>Example</th>
+</tr></thead><tbody>
+<tr>
+<td><code class="inline">CONCAT</code> / `\</td>
+<td>\</td>
+<td>`</td>
+<td><code class="inline">CONCAT('a', 'b')</code> or `'a' \</td>
+<td>\</td>
+<td>'b'`</td>
+</tr>
+<tr>
+<td><code class="inline">LENGTH</code></td>
+<td><code class="inline">LENGTH('hello')</code> → 5</td>
+</tr>
+<tr>
+<td><code class="inline">UPPER</code> / <code class="inline">LOWER</code></td>
+<td>Case conversion</td>
+</tr>
+<tr>
+<td><code class="inline">TRIM</code> / <code class="inline">LTRIM</code> / <code class="inline">RTRIM</code></td>
+<td>Remove whitespace</td>
+</tr>
+<tr>
+<td><code class="inline">SUBSTR</code></td>
+<td><code class="inline">SUBSTR('hello', 1, 3)</code> → 'hel'</td>
+</tr>
+<tr>
+<td><code class="inline">REPLACE</code></td>
+<td><code class="inline">REPLACE('hello', 'l', 'r')</code></td>
+</tr>
+<tr>
+<td><code class="inline">SPLIT_PART</code></td>
+<td><code class="inline">SPLIT_PART('a-b-c', '-', 2)</code> → 'b'</td>
+</tr>
+<tr>
+<td><code class="inline">REGEXP_LIKE</code></td>
+<td>Pattern matching</td>
+</tr>
+</tbody></table>
+
+<hr class="section-break">
+
+<h2>5.6 Date/Time Functions</h2>
+
+<table>
+<thead><tr>
+<th>Function</th>
+<th>Description</th>
+</tr></thead><tbody>
+<tr>
+<td><code class="inline">CURRENT_DATE()</code></td>
+<td>Today's date</td>
+</tr>
+<tr>
+<td><code class="inline">CURRENT_TIMESTAMP()</code></td>
+<td>Current timestamp</td>
+</tr>
+<tr>
+<td><code class="inline">DATEADD(part, n, date)</code></td>
+<td>Add interval to date</td>
+</tr>
+<tr>
+<td><code class="inline">DATEDIFF(part, d1, d2)</code></td>
+<td>Difference between dates</td>
+</tr>
+<tr>
+<td><code class="inline">DATE_TRUNC(part, date)</code></td>
+<td>Truncate to precision</td>
+</tr>
+<tr>
+<td><code class="inline">TO_DATE(str, fmt)</code></td>
+<td>String to date</td>
+</tr>
+<tr>
+<td><code class="inline">TO_TIMESTAMP(str, fmt)</code></td>
+<td>String to timestamp</td>
+</tr>
+<tr>
+<td><code class="inline">YEAR/MONTH/DAY(date)</code></td>
+<td>Extract component</td>
+</tr>
+</tbody></table>
+
+<hr class="section-break">
+
+<h2>5.7 Conditional Expressions</h2>
+
+<pre><code>
+-- CASE
+
+SELECT CASE WHEN status = 'A' THEN 'Active' ELSE 'Inactive' END;
+
+
+
+-- IFF (Snowflake shorthand for simple CASE)
+
+SELECT IFF(status = 'A', 'Active', 'Inactive');
+
+
+
+-- COALESCE
+
+SELECT COALESCE(col1, col2, 'default');  -- First non-null
+
+
+
+-- NVL / NVL2
+
+SELECT NVL(col1, 'default');             -- If null, use default
+
+SELECT NVL2(col1, 'has value', 'null');  -- If not null / if null
+
+
+
+-- NULLIF
+
+SELECT NULLIF(col1, col2);  -- Returns NULL if equal
+
+
+
+-- DECODE
+
+SELECT DECODE(status, 'A', 'Active', 'I', 'Inactive', 'Unknown');
+
+
+
+-- ZEROIFNULL / NULLIFZERO
+
+SELECT ZEROIFNULL(col1);  -- NULL → 0
+
+SELECT NULLIFZERO(col1);  -- 0 → NULL
+
+</code></pre>
+
+<hr class="section-break">
+
+<h2>5.8 Sequences</h2>
+
+<pre><code>
+CREATE SEQUENCE my_seq START = 1 INCREMENT = 1;
+
+
+
+-- Use in INSERT
+
+INSERT INTO my_table VALUES (my_seq.NEXTVAL, 'data');
+
+
+
+-- Sequences are NOT gap-free (gaps are normal)
+
+</code></pre>
+
+<hr class="section-break">
+
+<h2>5.9 Sampling</h2>
+
+<pre><code>
+-- Row-based sampling (approximate % of rows)
+
+SELECT * FROM my_table SAMPLE (10);  -- ~10% of rows
+
+
+
+-- Block-based sampling (faster for large tables)
+
+SELECT * FROM my_table SAMPLE BLOCK (10);  -- ~10% of blocks
+
+
+
+-- Fixed row count
+
+SELECT * FROM my_table SAMPLE (100 ROWS);
+
+</code></pre>
+
+<hr class="section-break">
+
+<h2>5.10 PIVOT / UNPIVOT</h2>
+
+<pre><code>
+-- PIVOT: rows to columns
+
+SELECT * FROM sales
+
+  PIVOT(SUM(amount) FOR quarter IN ('Q1','Q2','Q3','Q4'));
+
+
+
+-- UNPIVOT: columns to rows
+
+SELECT * FROM pivoted_sales
+
+  UNPIVOT(amount FOR quarter IN (Q1, Q2, Q3, Q4));
+
+</code></pre>
+
+</section>
+<div class="page-break"></div>
+<section class="domain">
+<h1 class="domain-title">Domain 6: Data Protection and Data Sharing (10%)</h1>
+
+<h2>6.1 Time Travel</h2>
+
+<h3>Overview</h3>
+<ul>
+<li>Access historical data at any point within the retention period</li>
+<li>Available for tables, schemas, and databases</li>
+</ul>
+
+<h3>Retention Periods</h3>
+<table>
+<thead><tr>
+<th>Object Type</th>
+<th>Standard Edition</th>
+<th>Enterprise+</th>
+</tr></thead><tbody>
+<tr>
+<td>Permanent table</td>
+<td>0-1 day</td>
+<td>0-90 days</td>
+</tr>
+<tr>
+<td>Transient table</td>
+<td>0-1 day</td>
+<td>0-1 day</td>
+</tr>
+<tr>
+<td>Temporary table</td>
+<td>0-1 day</td>
+<td>0-1 day</td>
+</tr>
+</tbody></table>
+
+<h3>Time Travel Queries</h3>
+<pre><code>
+-- By timestamp
+
+SELECT * FROM my_table AT(TIMESTAMP =&gt; '2024-01-15 10:00:00'::TIMESTAMP);
+
+
+
+-- By offset (seconds)
+
+SELECT * FROM my_table AT(OFFSET =&gt; -60*5);  -- 5 minutes ago
+
+
+
+-- By query ID
+
+SELECT * FROM my_table BEFORE(STATEMENT =&gt; '&lt;query_id&gt;');
+
+</code></pre>
+
+<h3>UNDROP</h3>
+<pre><code>
+UNDROP TABLE my_table;
+
+UNDROP SCHEMA my_schema;
+
+UNDROP DATABASE my_database;
+
+</code></pre>
+<ul>
+<li>Restores the most recently dropped object with that name</li>
+<li>Only works within the Time Travel retention period</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>6.2 Fail-Safe</h2>
+
+<table>
+<thead><tr>
+<th>Aspect</th>
+<th>Detail</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Duration</strong></td>
+<td>7 days (starts after Time Travel expires)</td>
+</tr>
+<tr>
+<td><strong>Access</strong></td>
+<td>Snowflake support ONLY (not user-accessible)</td>
+</tr>
+<tr>
+<td><strong>Object types</strong></td>
+<td>Permanent tables only</td>
+</tr>
+<tr>
+<td><strong>Cost</strong></td>
+<td>Storage cost for the data during Fail-Safe period</td>
+</tr>
+<tr>
+<td><strong>Configurable?</strong></td>
+<td>No -- always 7 days, cannot be changed</td>
+</tr>
+</tbody></table>
+
+<p><strong>Transient and temporary tables have NO Fail-Safe period.</strong></p>
+
+<h3>Total Data Protection Timeline (Permanent Table, Enterprise+)</h3>
+<pre><code>
+[Current Data] → [Time Travel: up to 90 days] → [Fail-Safe: 7 days]
+
+Max total: 97 days of recovery window
+
+</code></pre>
+
+<hr class="section-break">
+
+<h2>6.3 Data Sharing</h2>
+
+<h3>Secure Data Sharing (Provider → Consumer)</h3>
+<ul>
+<li><strong>Zero-copy</strong> -- no data movement or copying</li>
+<li>Provider creates a <strong>SHARE</strong> object and grants access to databases/schemas/tables/views</li>
+<li>Consumer creates a database FROM the share</li>
+<li>Real-time -- consumer always sees current data</li>
+<li><strong>Cross-region/cross-cloud</strong>: requires replication</li>
+</ul>
+
+<h3>Share Objects</h3>
+<pre><code>
+-- Provider side
+
+CREATE SHARE my_share;
+
+GRANT USAGE ON DATABASE mydb TO SHARE my_share;
+
+GRANT USAGE ON SCHEMA mydb.public TO SHARE my_share;
+
+GRANT SELECT ON TABLE mydb.public.my_table TO SHARE my_share;
+
+ALTER SHARE my_share ADD ACCOUNTS = consumer_account;
+
+
+
+-- Consumer side
+
+CREATE DATABASE shared_db FROM SHARE provider_account.my_share;
+
+</code></pre>
+
+<h3>Secure Views for Sharing</h3>
+<ul>
+<li>Use <strong>secure views</strong> to share controlled subsets of data</li>
+<li>Definition is hidden from consumers</li>
+<li>Prevents consumers from deducing underlying data through query profiling</li>
+</ul>
+
+<h3>What Can Be Shared?</h3>
+<ul>
+<li>Tables (permanent, dynamic, external, Iceberg -- not transient/temporary)</li>
+<li>Views (regular views, secure views, secure materialized views, semantic views)</li>
+<li>UDFs (both secure and non-secure)</li>
+<li>Cortex Search services</li>
+<li>Models (USER_MODEL, CORTEX_FINETUNED, DOC_AI)</li>
+</ul>
+
+<p><strong>Note:</strong> Snowflake strongly recommends sharing <strong>secure</strong> views and secure UDFs</p>
+<p>to prevent exposing sensitive data or view definitions to consumers.</p>
+<p>Regular views CAN be shared but their definition is visible to consumers.</p>
+
+<h3>What CANNOT Be Shared?</h3>
+<ul>
+<li>Transient/temporary tables</li>
+<li>Stages, pipes, streams, tasks</li>
+<li>Stored procedures</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>6.4 Reader Accounts</h2>
+
+<ul>
+<li>Created by the provider for consumers who do NOT have a Snowflake account</li>
+<li>Provider creates and manages the reader account</li>
+<li><strong>Provider pays for compute</strong> used by the reader account</li>
+<li>Reader accounts have limited functionality (read-only access to shared data)</li>
+<li>Reader accounts cannot create shares themselves</li>
+</ul>
+
+<pre><code>
+CREATE MANAGED ACCOUNT reader_acct
+
+  ADMIN_NAME = 'admin'
+
+  ADMIN_PASSWORD = 'P@ssword!'
+
+  TYPE = READER;
+
+</code></pre>
+
+<hr class="section-break">
+
+<h2>6.5 Data Replication</h2>
+
+<h3>Database Replication</h3>
+<ul>
+<li>Replicate databases across regions and cloud providers</li>
+<li>Uses <strong>primary</strong> and <strong>secondary</strong> database model</li>
+<li>Secondary databases are read-only replicas</li>
+<li>Refresh is manual or scheduled</li>
+</ul>
+
+<h3>Account Replication (Business Critical+)</h3>
+<ul>
+<li>Replicate account-level objects (users, roles, warehouses, resource monitors)</li>
+<li>Enables <strong>Failover</strong> and <strong>Failback</strong> for disaster recovery</li>
+<li><strong>Failover</strong>: promote secondary to primary</li>
+<li><strong>Failback</strong>: return to original primary after incident resolved</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>6.6 Data Encryption</h2>
+
+<h3>At Rest</h3>
+<ul>
+<li>AES-256 bit encryption (always on)</li>
+<li>Snowflake manages keys by default</li>
+<li><strong>Periodic re-keying</strong> (Enterprise+): automatic annual re-encryption</li>
+<li><strong>Tri-Secret Secure</strong> (Business Critical+): composite key from Snowflake + customer</li>
+</ul>
+
+<h3>In Transit</h3>
+<ul>
+<li>TLS 1.2 (always on)</li>
+<li>All client connections are encrypted</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>6.7 Data Classification</h2>
+
+<ul>
+<li>Automatic or manual classification of columns</li>
+<li>Identifies sensitive data (PII, PHI, financial)</li>
+<li>Tags columns with system tags:</li>
+<li><code class="inline">SNOWFLAKE.CORE.SEMANTIC_CATEGORY</code> -- what kind of data</li>
+<li><code class="inline">SNOWFLAKE.CORE.PRIVACY_CATEGORY</code> -- sensitivity level</li>
+<li>Integrates with masking policies</li>
+</ul>
+
+<hr class="section-break">
+
+<h2>6.8 Cloning (Zero-Copy Clone)</h2>
+
+<pre><code>
+CREATE TABLE clone_table CLONE source_table;
+
+CREATE SCHEMA clone_schema CLONE source_schema;
+
+CREATE DATABASE clone_db CLONE source_db;
+
+</code></pre>
+
+<h3>Key Facts</h3>
+<ul>
+<li><strong>Zero-copy</strong>: no data is physically copied initially</li>
+<li>Clone is independent -- changes to clone don't affect source (and vice versa)</li>
+<li>Only new/modified micro-partitions consume additional storage</li>
+<li>Cloning is instant regardless of data size</li>
+<li><strong>Database/schema clones</strong>: child object grants are preserved automatically</li>
+<li><strong>Individual table clones</strong>: use <code class="inline">COPY GRANTS</code> to preserve grants</li>
+<li><code class="inline">CREATE TABLE clone_t CLONE source_t COPY GRANTS;</code></li>
+<li>Cloning a database clones all child objects</li>
+</ul>
+
+<h3>Time Travel Cloning</h3>
+<pre><code>
+CREATE TABLE restored CLONE my_table AT(TIMESTAMP =&gt; '2024-01-15 10:00:00');
+
+</code></pre>
+<ul>
+<li>Create a clone from a historical point in time</li>
+</ul>
+
+</section>
+
+</body>
+</html>
